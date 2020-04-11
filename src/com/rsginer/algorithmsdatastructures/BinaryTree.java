@@ -11,12 +11,6 @@ public class BinaryTree {
         this.root = null;
     }
 
-    @Override
-    public String toString() {
-        return "BinaryTree { \n" +
-                "root=" + root +
-                "\n }";
-    }
 
     public void add(int d, String name) {
         NodeTree node = new NodeTree(d, name);
@@ -38,6 +32,7 @@ public class BinaryTree {
                         return;
                     }
                 } else {
+                    // Go to right child
                     aux = aux.rightChild;
 
                     if (aux == null) {
@@ -47,5 +42,23 @@ public class BinaryTree {
                 }
             }
         }
+    }
+
+    public void inOrden(NodeTree root) {
+        if (root != null) {
+            this.inOrden(root.leftChild);
+            this.inOrden(root.rightChild);
+        }
+    }
+
+    public boolean isEmpty () {
+        return this.root == null;
+    }
+
+    @Override
+    public String toString() {
+        return "BinaryTree { \n" +
+                "root=" + root +
+                "\n }";
     }
 }

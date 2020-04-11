@@ -18,7 +18,6 @@ public class Main {
             list.add(arr[i]);
         }
 
-
         QuickSort quickSort = new QuickSort();
         int[] orderedIntArr = quickSort.sortIntArray(arr);
         List<Integer> orderedList = quickSort.sortIntegerList(list, 0, orderedIntArr.length - 1);
@@ -34,21 +33,27 @@ public class Main {
 
         do {
             try {
-                option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Add node \n 2. Exit \n Choose an option"));
+                option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Add node \n 2. Read tree \n 3. Exit \n Choose an option"));
                 switch (option) {
                     case 1:
                         name = JOptionPane.showInputDialog(null, "Node name", "Adding node");
                         element = Integer.parseInt(JOptionPane.showInputDialog(null, "Node number", "Adding node"));
                         tree.add(element, name);
                         break;
+                    case 2:
+                        if (!tree.isEmpty()) {
+                            tree.inOrden(tree.root);
+                        } else {
+                            System.out.println("Is empty");
+                        }
                     default:
-                        option = 2;
+                        option = 3;
                         break;
                 }
             } catch (NumberFormatException n) {
                 System.out.println(n.getMessage());
             }
-        } while (option != 2);
+        } while (option != 3);
 
         System.out.println(tree);
 
