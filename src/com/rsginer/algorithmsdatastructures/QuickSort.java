@@ -1,16 +1,22 @@
 package com.rsginer.algorithmsdatastructures;
 
+import java.util.Collections;
+import java.util.List;
+
 public class QuickSort {
 
-    int[] lastJob;
+    int[] lastIntJob;
+    List<Integer> lastListJob;
 
-    public void sortIntArray(int[] arr) {
+    public int[] sortIntArray(int[] arr) {
         int start = 0;
         int end = arr.length - 1;
-        this.lastJob = quickSortIntArray(arr, start, end);
+
+        this.lastIntJob = quickSortIntArray(arr, start, end);
+        return this.lastIntJob;
     }
 
-    public static int[] quickSortIntArray (int[] arr, int start, int end) {
+    public int[] quickSortIntArray (int[] arr, int start, int end) {
         if (arr == null || arr.length == 0)
             return arr;
 
@@ -19,8 +25,8 @@ public class QuickSort {
 
         int middle = start + (end - start) / 2;
         int pivot = arr[middle];
-
         int i = start, j = end;
+
         while (i <= j) {
             while (arr[i] < pivot) {
                 i++;
@@ -48,22 +54,46 @@ public class QuickSort {
         return arr;
     }
 
-    public static void swap (int[] arr, int a, int b) {
-        int aux = arr[a];
-        arr[a] = arr[b];
-        arr[b] = aux;
-    }
+    public static List<Integer> sortIntegerList(List<Integer> list, int start, int end) {
+        if (list == null || list.size() == 0)
+            return list;
 
-    @Override
-    public String toString() {
-        String s = "[";
+        if (start >= end)
+            return list;
 
-        for (int i = 0; i < this.lastJob.length; i++) {
-            s += this.lastJob[i] + "" + (i != this.lastJob.length -1 ? "," : "");
+        int middle = start + (end - start) / 2;
+        int pivot = list.get(middle);
+        int i = start, j = end;
+
+        while (i <= j) {
+            while (list.get(i) < pivot) {
+                i++;
+            }
+
+            while (list.get(j) > pivot) {
+                j--;
+            }
+
+            if (i <= j) {
+                Collections.swap(list, i, j);
+                i++;
+                j--;
+            }
         }
 
-        s += "]";
+        if (start < j)
+            sortIntegerList(list, start, j);
 
-        return s;
+        if (end > i)
+            sortIntegerList(list, i, end);
+
+        return list;
+    }
+
+    public static void swap (int[] arr, int a, int b) {
+        int aux = arr[a];
+
+        arr[a] = arr[b];
+        arr[b] = aux;
     }
 }
