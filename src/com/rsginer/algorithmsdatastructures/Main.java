@@ -1,11 +1,16 @@
 package com.rsginer.algorithmsdatastructures;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class Main {
 
     public static void main(String[] args) {
+
+        /* QuickSort test
         int[] arr = {1, 5, 6, 3, 2, 9, 8, 7};
         List<Integer> list = new ArrayList<Integer>();
 
@@ -20,7 +25,32 @@ public class Main {
 
         for (int i = 0; i < orderedList.size(); i++) {
             System.out.println(orderedList.get(i));
-        }
+        } */
+
+        int option = 0;
+        int element;
+        String name;
+        BinaryTree tree = new BinaryTree();
+
+        do {
+            try {
+                option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Add node \n 2. Exit \n Choose an option"));
+                switch (option) {
+                    case 1:
+                        name = JOptionPane.showInputDialog(null, "Node name", "Adding node");
+                        element = Integer.parseInt(JOptionPane.showInputDialog(null, "Node number", "Adding node"));
+                        tree.add(element, name);
+                        break;
+                    default:
+                        option = 2;
+                        break;
+                }
+            } catch (NumberFormatException n) {
+                System.out.println(n.getMessage());
+            }
+        } while (option != 2);
+
+        System.out.println(tree);
 
     }
 
