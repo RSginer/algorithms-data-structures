@@ -44,10 +44,10 @@ public class BinaryTree {
         }
     }
 
-    public void inOrden(NodeTree root) {
+    public void inOrder(NodeTree root) {
         if (root != null) {
-            this.inOrden(root.leftChild);
-            this.inOrden(root.rightChild);
+            this.inOrder(root.leftChild);
+            this.inOrder(root.rightChild);
         }
     }
 

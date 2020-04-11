@@ -42,7 +42,7 @@ public class Main {
                         break;
                     case 2:
                         if (!tree.isEmpty()) {
-                            tree.inOrden(tree.root);
+                            tree.inOrder(tree.root);
                         } else {
                             System.out.println("Is empty");
                         }
