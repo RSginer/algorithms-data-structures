@@ -37,7 +37,7 @@ public class Main {
 
         do {
             try {
-                option = Integer.parseInt(JOptionPane.showInputDialog(null, " 1. Add node \n 2. Read tree inOrder \n 3. Read tree postOrder \n 4. Read tree preOrder \n 5. Search node \n 6. Exit \n\n Choose an option", JOptionPane.QUESTION_MESSAGE));
+                option = Integer.parseInt(JOptionPane.showInputDialog(null, " 1. Add node \n 2. Read tree inOrder \n 3. Read tree postOrder \n 4. Read tree preOrder \n 5. Search node \n 6. Remove node \n 7. Exit \n\n Choose an option", JOptionPane.QUESTION_MESSAGE));
                 switch (option) {
                     case 1:
                         name = JOptionPane.showInputDialog(null, "Node name", "Adding node", JOptionPane.QUESTION_MESSAGE);
@@ -45,27 +45,30 @@ public class Main {
                         tree.add(element, name);
                         break;
                     case 2:
+                        System.out.println("InOrder");
                         if (!tree.isEmpty()) {
                             tree.inOrder(tree.root, new Consumer<NodeTree>() {
                                 @Override
                                 public void accept(NodeTree nodeTree) {
-                                   // System.out.println(nodeTree.data);
+                                    System.out.print(nodeTree.data + ", ");
                                 }
                             });
-
+                            System.out.println(" ");
                             printer.print(tree.root);
                         } else {
                             System.out.println("Is empty");
                         }
                         break;
                     case 3:
+                        System.out.println("postOrder");
                         if (!tree.isEmpty()) {
                             tree.postOrder(tree.root, new Consumer<NodeTree>() {
                                 @Override
                                 public void accept(NodeTree nodeTree) {
-                                   // System.out.println(nodeTree.data);
+                                    System.out.print(nodeTree.data + ", ");
                                 }
                             });
+                            System.out.println(" ");
                             printer.print(tree.root);
 
                         } else {
@@ -73,15 +76,16 @@ public class Main {
                         }
                         break;
                     case 4:
+                        System.out.println("preOrder");
                         if (!tree.isEmpty()) {
                             tree.preOrder(tree.root, new Consumer<NodeTree>() {
                                 @Override
                                 public void accept(NodeTree nodeTree) {
-                                    // System.out.println(nodeTree.data);
+                                     System.out.print(nodeTree.data + ", ");
                                 }
                             });
+                            System.out.println(" ");
                             printer.print(tree.root);
-
                         } else {
                             System.out.println("Is empty");
                         }
@@ -92,6 +96,7 @@ public class Main {
                             data = Integer.parseInt(JOptionPane.showInputDialog(null, "Node number to search", "Adding node"));
                             NodeTree node = tree.searhNode(data);
                             if (node != null) {
+                                System.out.println();
                                 printer.print(node);
                             } else {
                                 System.out.println("Not found");
@@ -100,14 +105,24 @@ public class Main {
                             System.out.println("Is empty");
                         }
                         break;
+                    case 6:
+                        if (!tree.isEmpty()) {
+                            int data;
+                            data = Integer.parseInt(JOptionPane.showInputDialog(null, "Node number to remove", 0));
+                            boolean removed = tree.removeNode(data);
+                            System.out.println("Removed node with data " + data + " " + removed);
+                        } else {
+                            System.out.println("Is empty");
+                        }
+                        break;
                     default:
-                        option = 6;
+                        option = 7;
                         break;
                 }
             } catch (NumberFormatException n) {
                 System.out.println(n.getMessage());
             }
-        } while (option != 6);
+        } while (option != 7);
 
     }
 
