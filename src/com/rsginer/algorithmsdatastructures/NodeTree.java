@@ -1,6 +1,6 @@
 package com.rsginer.algorithmsdatastructures;
 
-public class NodeTree {
+public class NodeTree implements PrintableNode{
     int data;
     NodeTree leftChild;
     NodeTree rightChild;
@@ -14,12 +14,17 @@ public class NodeTree {
     }
 
     @Override
-    public String toString() {
-        return "NodeTree { \n" +
-                "data=" + data +
-                "\n , leftChild=" + leftChild +
-                "\n, rightChild=" + rightChild +
-                "\n, name='" + name + '\'' +
-                "\n }";
+    public PrintableNode getLeft() {
+        return this.leftChild;
+    }
+
+    @Override
+    public PrintableNode getRight() {
+        return this.rightChild;
+    }
+
+    @Override
+    public String getText() {
+        return this.name + ' ' + this.data;
     }
 }
