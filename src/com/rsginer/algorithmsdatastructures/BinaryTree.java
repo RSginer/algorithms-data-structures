@@ -1,5 +1,8 @@
 package com.rsginer.algorithmsdatastructures;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public class BinaryTree {
     NodeTree root;
 
@@ -10,8 +13,7 @@ public class BinaryTree {
     public BinaryTree() {
         this.root = null;
     }
-
-
+    
     public void add(int d, String name) {
         NodeTree node = new NodeTree(d, name);
 
@@ -44,11 +46,48 @@ public class BinaryTree {
         }
     }
 
-    public void inOrder(NodeTree root) {
+    public void inOrder(NodeTree root, Consumer<NodeTree> callback) {
         if (root != null) {
-            this.inOrder(root.leftChild);
-            this.inOrder(root.rightChild);
+            this.inOrder(root.leftChild, callback);
+            callback.accept(root);
+            this.inOrder(root.rightChild, callback);
         }
+    }
+
+    public void preOrder(NodeTree root, Consumer<NodeTree> callback) {
+        if (root != null) {
+            callback.accept(root);
+            this.inOrder(root.leftChild, callback);
+            this.inOrder(root.rightChild, callback);
+        }
+    }
+
+    public void postOrder(NodeTree root, Consumer<NodeTree> callback) {
+        if (root != null) {
+            this.inOrder(root.leftChild, callback);
+            this.inOrder(root.rightChild, callback);
+            callback.accept(root);
+        }
+    }
+
+    public NodeTree searhNode(int data) {
+        NodeTree aux = this.root;
+
+        while (aux.data != data) {
+            if (aux.data < data) {
+                aux = aux.leftChild;
+            }
+
+            if (aux.data > data) {
+                aux = aux.rightChild;
+            }
+
+            if (aux == null) {
+                return null;
+            }
+        }
+
+        return aux;
     }
 
     public boolean isEmpty () {

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class Main {
@@ -33,7 +34,7 @@ public class Main {
 
         do {
             try {
-                option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Add node \n 2. Read tree \n 3. Exit \n Choose an option"));
+                option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Add node \n 2. Read tree \n 3. Search node \n 4. Exit \n Choose an option"));
                 switch (option) {
                     case 1:
                         name = JOptionPane.showInputDialog(null, "Node name", "Adding node");
@@ -42,20 +43,36 @@ public class Main {
                         break;
                     case 2:
                         if (!tree.isEmpty()) {
-                            tree.inOrder(tree.root);
+                            tree.inOrder(tree.root, new Consumer<NodeTree>() {
+                                @Override
+                                public void accept(NodeTree nodeTree) {
+                                    System.out.println(nodeTree.data);
+                                }
+                            });
+                        } else {
+                            System.out.println("Is empty");
+                        }
+                    case 3:
+                        if (!tree.isEmpty()) {
+                            int data;
+                            data = Integer.parseInt(JOptionPane.showInputDialog(null, "Node number to search", "Adding node"));
+                            NodeTree node = tree.searhNode(data);
+                            if (node != null) {
+                                System.out.println(node);
+                            } else {
+                                System.out.println("Not found");
+                            }
                         } else {
                             System.out.println("Is empty");
                         }
                     default:
-                        option = 3;
+                        option = 4;
                         break;
                 }
             } catch (NumberFormatException n) {
                 System.out.println(n.getMessage());
             }
-        } while (option != 3);
-
-        System.out.println(tree);
+        } while (option != 4);
 
     }
 
